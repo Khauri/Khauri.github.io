@@ -1,61 +1,45 @@
 <!-- 
-    Home Page
+    Home Page. 
+    The idea is to have a simple carousel where each section "previews" the next page.
+    Clicking on the section itself launches a transition where the carousel grows in size
+    until the next page is revealed. (Sort of a Maximizaiton Effect)
 -->
 <template>
     <div class="container">
         <div class="section-nav">
             <NavBar />
         </div>
-        
-        <div class="section header">
-            <div class="subsection header-text text">
-                <h1 class="header-title">Khauri McClain</h1>
-                <h3>Software Engineer. Creative Type.</h3>
-                <div class="header-social">
-                    <fa class="sm-icon" :icon="['fab','github']"/>
-                    <fa class="sm-icon" :icon="['fab','twitter']"/>
-                    <fa class="sm-icon" :icon="['fab','facebook']"/>
-                    <fa class="sm-icon" :icon="['fab','instagram']"/>
+        <div class="content-wrapper">
+            <carousel :loop="true">
+                <slide :tabLabel="`About`">
+                    <about />
+                </slide>
+            </carousel>
+            <div class="navigation">
+                <div class="nav-tab">
+                    About Me
+                </div>
+                <div class="nav-tab">
+                    Projects
+                </div>
+                <div class="nav-tab">
+                    Blog
+                </div>
+                <div class="nav-tab">
+                    Contact
                 </div>
             </div>
         </div>
-        <div class="section about">
-            <div class="subsection">
-                <div class="subsection text about-text">
-                    <h1> About Me... </h1>
-                    <div class="about-section">
-                        <fa class="sm-icon" :icon="['fas','graduation-cap']"/>
-                        <p>B.S. Computer Science from The College of William And Mary</p>
-                    </div>
-                    <div class="about-section">
-                        <fa class="sm-icon" :icon="['fas','asterisk']"/>
-                        <p>Jack of all trades and a master of most.</p>
-                    </div>
-                    <div class="about-section">
-                        <fa class="sm-icon" :icon="['fas','hand-rock']"/>
-                        <p>Black/African American (Hire me for Diversity)</p>
-                    </div>
-                    <p>See more...</p>
-                </div>
-            </div>
-            <div class="subsection" style="background:#35CE8D">
-                <img class="about-img" src="../../assets/bg2.jpg"/>
-            </div>
-        </div>
-         <div class="section projects">
-            <div class="subsection"></div>
-            <div class="subsection filled">
-                <h1>projects</h1>
-            </div>
-        </div>
-        <div class="footer"></div>
     </div>
 </template>
 
 <script>
 import { NavBar } from '@/components'
+import about from '../About'
+import slide from './Slide'
+import carousel from './Carousel'
 export default {
-    components : { NavBar }
+    components : { NavBar, slide, carousel, about }
 }
 </script>
 
@@ -73,100 +57,41 @@ export default {
         background-size : cover;
         background-position : center;
     }
-    .section-nav {
-        max-width : 720px;
-        width : 720px;
-    }
-    .section {
-        border-radius : 4px;
+    .content-wrapper{
+        /** Relative Positioning Here is pretty important */ 
         position : relative;
-        display : flex;
-        flex-direction : row;
-        min-height : 400px;
-        max-width : 720px;
-        width : 720px;
-        margin-bottom : 20px;
-        background : rgba(33,29,28,.85);
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    }
-    .subsection {
-        flex : 1;
-        padding : 10;
-        overflow : hidden;
-    }
-    .filled {
-        font-size : 2.5em;
-        color : white;
-        cursor : pointer;
-        display : flex; 
-        justify-content : center;
-        align-items : center;
-        opacity : 0;
-        position : absolute;
-        width : 100%;
-        height : 100%;
-        background : #35CE8D;
-        transition : ease-in-out .5s opacity;
-
-    }
-    .section:hover > .filled {
-        opacity : 0.5;
-        transition : ease-in-out .3s opacity;
-    }
-    .header {
-        background-image: url('../../assets/pic.jpg');
-        background-size : contain;
-        background-repeat:   no-repeat;
-        background-position : center center;
-    }
-    .projects {
-        background-image: url('../../assets/pic2.jpg');
-        background-size : contain;
-        background-repeat:   no-repeat;
-        background-position : center center;
-    }
-    .header-text {
-        padding-left : 80px;
-        max-width : 240px;
-    }
-    .text {
-        text-align : left;
         display : flex;
         flex-direction: column;
         justify-content: center;
-        align-items : flex-start;
-    }
-    .header-text > .header-title {
-        font-size : 2.5em;
-        margin : 0;
-    }
-    .header-text > .header-social {
-        display : flex;
-        flex-direction : row;
-    }
-    .about-text {
-        padding : 10px 60px;
-    }
-    .about-text div {
-        margin : 10px 0;
-    }
-    .about-text p {
-        margin : 0 8px;
-    }
-    .about-section {
-        display : flex;
-        flex-direction: row;
-    }
-    .about-img {
         width : 100%;
         height : 100%;
+
     }
-    .sm-icon {
-        cursor : pointer;
-        margin : 0 5px;
+    .section-nav {
+        flex : 0;
+        width : 720px;
     }
-    .footer {
+    
+    .navigation {
+        position : absolute;
+        top : 400px;
+        height : 60px;
         width : 100%;
+        background : #35ce8d;
+        width : 720px;
+        align-self : center;
+        border-radius : 0 0 4px 4px;
+        z-index : -1;
+        display : flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .footer {
+        flex : 0;
+        width : 100%;
+        height : 300px;
         margin-top : 30px;
         background : rgba(0,0,0,.9);
         min-height : 300px;
