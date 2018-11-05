@@ -1,7 +1,7 @@
 <template>
-    <div class="about-container">
-        <div class="about-header">
-            <div class="header-img"></div>
+    <page class="about-container">
+        <!-- Header -->
+        <page-header :img='"pic.jpg"' :isExpanded="isExpanded">
             <div class="header-text text">
                 <h1 class="header-title">Khauri McClain</h1>
                 <h3>Software Engineer. Creative Type.</h3>
@@ -12,14 +12,35 @@
                     <fa class="sm-icon" :icon="['fab','instagram']"/>
                 </div>
             </div>
-        </div>
-        <article class="about-content"></article>
-    </div>
+        </page-header>
+        <!-- Body -->
+        <page-body>
+            <h1>About Me</h1>
+            <h3>(kah-HAH-ree muh-KLAYN)</h3>
+            <p>
+                My name is Khauri McClain. I graduated from <a href="wm.edu">The College of William &amp; Mary</a>
+                with a bachelor's degree in computer science in 2018.
+            </p>
+            <h3> FAQ's </h3>
+            <b><i>Q: Nice Name. What's It Mean?</i></b>
+            <p>It doesn't mean anything.</p>
+
+        </page-body>
+        <!-- Footer(?) -->
+    </page>
 </template>
 
 <script>
+import {Page, PageHeader, PageBody} from '@/components'
 export default {
     name : "AboutPage",
+    props : {
+        isExpanded : {
+            default : true,
+            type : Boolean
+        }
+    },
+    components : { Page, PageHeader, PageBody },
     data(){
         return {}
     },
@@ -28,23 +49,11 @@ export default {
 
 <style>
     .about-container {
-        width : 100%;
-        height : 100%;
-        display : flex;
-        flex-direction : column;
-        justify-content: center;
-        align-items: center;
-        overflow-y : scroll;
-        position : relative;
+        color : white;
         background: url('../../assets/bg2.jpg');
         background-size : cover;
         background-repeat:   no-repeat;
         background-position : center center;
-    }
-    .about-header {
-        display : flex;
-        width : 720px;
-        min-height : 400px;
     }
     .about-content{
         align-self:  center;
@@ -56,19 +65,7 @@ export default {
         z-index : 1;
         text-align : left;
         max-width : 240px;
-        margin : 80px;
-    }
-    .header-img{
-        position : absolute;
-        top : 0;
-        left : 0;
-        right : 0; 
-        height : 400px;
-        z-index : 0;
-        background-image: url('../../assets/pic.jpg');
-        background-size : contain;
-        background-repeat:   no-repeat;
-        background-position : center center;
+        margin : auto 80px;
     }
     .sm-icon {
         cursor : pointer;

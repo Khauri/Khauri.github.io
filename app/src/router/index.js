@@ -2,13 +2,23 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase'
 
-import { Home, ErrorPage, Login, Dashboard } from '@/screens'
+import { Home, ErrorPage, Login, Dashboard, About, Projects } from '@/screens'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/about-me',
+    name: 'About',
+    component: About
+  },
+  {
+    path: '/projects',
+    name : "Projects",
+    component : Projects
   },
   {
     path: '/login',

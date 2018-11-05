@@ -1,13 +1,23 @@
 <template>
     <div class="nav-root">
         <div class="header">
-            <h3>KM</h3>
+            <router-link to="/" class="nav-header">
+                <h3>KM</h3>
+            </router-link>
         </div>
         <div class="links">
-            <a href="#" class="nav-link">ABOUT</a>
-            <a href="#" class="nav-link">PROJECTS</a>
-            <a href="#" class="nav-link">RESUME</a>
-            <a href="#" class="nav-link">CONTACT</a>
+            <router-link class="nav-link" to="/about-me">
+                ABOUT
+            </router-link>
+            <router-link class="nav-link" to="/projects">
+                PROJECTS
+            </router-link>
+            <router-link class="nav-link" to="/blog">
+                BLOG
+            </router-link>
+            <router-link class="nav-link" to="/contact">
+                CONTACT
+            </router-link>
             <!-- <a href="#" class="nav-link" @click="signOut">Sign Out</a> -->
         </div>
         
@@ -38,6 +48,10 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         align-items : center;
+    }
+    .nav-header {
+        color : inherit;
+        text-decoration-line : none;
     }
     .nav-link {
         color : inherit;

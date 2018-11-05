@@ -6,46 +6,51 @@
 -->
 <template>
     <div class="container">
-        <div class="section-nav">
-            <NavBar />
-        </div>
         <div class="content-wrapper">
-            <carousel :loop="true">
+            <carousel :loop="true" :isExpanded="isExpanded" :activeTabIndex="activeTab">
                 <slide :tabLabel="`About`">
-                    <about />
+                    <about :isExpanded="isExpanded"/>
+                </slide>
+                <slide :tabLabel="`Projects`">
+                    <projects :isExpanded="isExpanded"/>
                 </slide>
             </carousel>
-            <div class="navigation">
-                <div class="nav-tab">
-                    About Me
-                </div>
-                <div class="nav-tab">
-                    Projects
-                </div>
-                <div class="nav-tab">
-                    Blog
-                </div>
-                <div class="nav-tab">
-                    Contact
+            <div class="navigation" v-if="!isExpanded">
+                <div 
+                    class="nav-tab" 
+                    v-for="(tab, index) in navTabs" 
+                    :key="`tab-${index}`"
+                    @click="isExpanded = true"
+                    @mouseover="activeTab = index">
+                    {{tab}}
                 </div>
             </div>
+            <!-- <div class="footer">Hey! Look. Listen man...</div> -->
             <canvas-drip :width="720" :height="500"/>
         </div>
     </div>
 </template>
 
 <script>
-import { NavBar, CanvasDrip } from '@/components'
+import { CanvasDrip } from '@/components'
 import about from '../About'
+import projects from '../Projects'
 import slide from './Slide'
 import carousel from './Carousel'
 export default {
     components : { 
-        NavBar, 
         CanvasDrip,
         slide, 
         carousel, 
-        about
+        about,
+        projects
+    },
+    data(){
+        return {
+            isExpanded : false,
+            navTabs : ['About Me', 'Projects', 'Blog', 'Contact'],
+            activeTab : 0
+        }
     }
 }
 </script>
@@ -59,8 +64,6 @@ export default {
         width : 100%;
         height : 100%;
         overflow-y : auto;
-        background : rgba(0,0,0,.12);
-        /* background-image : url("../../assets/bg2.jpg"); */
         background-size : cover;
         background-position : center;
     }
@@ -75,10 +78,6 @@ export default {
         height : 100%;
         overflow : hidden;
 
-    }
-    .section-nav {
-        flex : 0;
-        width : 720px;
     }
     
     .navigation {
@@ -115,8 +114,9 @@ export default {
         width : 100%;
         height : 300px;
         margin-top : 30px;
-        background : rgba(0,0,0,.9);
         min-height : 300px;
+        z-index : -4;
+        width : 720px;
     }
 </style>
 

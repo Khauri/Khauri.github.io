@@ -2,8 +2,7 @@
     <div :class="[
         'carousel-root',
         isExpanded ? 'carousel-root-expand' : ''
-        ]"
-        @click='isExpanded=!isExpanded'>
+        ]">
         <div class="pages">
             <slot></slot>
         </div>
@@ -12,9 +11,13 @@
             isExpanded ? `inner-carousel-expanded`:''
             ]">
             <div class="indicators">
-                <div class="indicator indicator-active"></div>
-                <div class="indicator"></div>
-                <div class="indicator"></div>
+                <div 
+                    :class="[
+                        `indicator`,
+                        index-1 == activeIndex ? 'indicator-active' : ''
+                    ]" 
+                    v-for="index in 4" 
+                    :key="`indicator-${index}`"/>
             </div>
         </div>
     </div>
@@ -28,7 +31,16 @@ export default {
         }
     },
 
-    // props : ['activeIndex'],
+    props : {
+        isExpanded : {
+            default : false, 
+            type : Boolean
+        },
+        activeTabIndex : {
+            default : 0,
+            type : Number
+        }
+    },
 
     computed : {
         // Returns Slides only 
@@ -42,6 +54,9 @@ export default {
         },
         tabCount : function(){
             return this.$children.length
+        },
+        activeIndex(){
+            return this.activeTabIndex
         }
     },
 
@@ -59,9 +74,7 @@ export default {
         return {
             // HAX(?)
             isReady  : false,
-            isExpanded : false,
             transitioning : false,
-            activeIndex : 0
         }
     },
 }
@@ -99,11 +112,12 @@ export default {
     .pages { 
         width : 100%;
         height : 100%;
+        display : flex;
+        justify-content: center;
     }
     
     .carousel-root-expand {
         clip-path: inset(0 0 0 0 round 0px);
-        /* clip-path : polygon(0 0,100% 0,100% 100%); */
     }
 
     .indicators {
@@ -121,7 +135,7 @@ export default {
         display : flex;
         justify-content: center;
         height : 400px;
-        transition : ease-in-out all 0.5s;
+        transition : ease-out all 0.5s;
     }
     .inner-carousel-expanded {
         opacity : 0;
@@ -133,6 +147,10 @@ export default {
         margin : 0 5px;
         border-radius : 10px;
         background : white;
+        transition : ease-out all 0.5s;
+    }
+    .inner-carousel-expanded .indicator {
+        margin : 0 30px;
     }
     .indicator-active {
         background : white;
