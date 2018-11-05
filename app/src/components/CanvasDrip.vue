@@ -1,12 +1,13 @@
 <template>
     <div class="drip-container">
         <canvas ref="canvas" :width="width" :height="height"/>
-        <h1 class="masked-text">driping with talent</h1>
+        <h1 class="masked-text">dripping with talent</h1>
     </div>
 </template>
 
 <script>
-
+let konamiCodeBuffer = [],
+    easterEgg = false
 export default {
     data(){
         return {
@@ -102,13 +103,27 @@ export default {
     },
 
     mounted(){
-        for (var i = 0; i < this.totalPaints; i++){
-            this.addPaint();
-        }
-        this.interval = setInterval( this.update, 40 );
+        document.addEventListener('keyup', (e)=>{
+            if(easterEgg){
+                return
+            }
+            if(konamiCodeBuffer.length >= 4){
+                konamiCodeBuffer.shift()
+            }
+            konamiCodeBuffer.push(e.key.toLowerCase())
+            if(konamiCodeBuffer.join("") == 'drip'){
+                easterEgg = true
+                for (var i = 0; i < this.totalPaints; i++){
+                    this.addPaint();
+                }
+                this.interval = setInterval( this.update, 40 )
+            }
+        })
     },
     beforeDestroy(){
-        clearInterval(this.interval)
+        if(this.interval){
+            clearInterval(this.interval)
+        }
     }
 }
 </script>
