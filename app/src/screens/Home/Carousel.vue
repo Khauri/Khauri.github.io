@@ -7,7 +7,10 @@
         <div class="pages">
             <slot></slot>
         </div>
-        <div class="inner-carousel">
+        <div :class="[
+            'inner-carousel',
+            isExpanded ? `inner-carousel-expanded`:''
+            ]">
             <div class="indicators">
                 <div class="indicator indicator-active"></div>
                 <div class="indicator"></div>
@@ -87,6 +90,7 @@ export default {
             round 
             4px 4px 0px 0px
         );
+
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         overflow : hidden;
         transition : ease-in-out all 0.5s;
@@ -99,6 +103,7 @@ export default {
     
     .carousel-root-expand {
         clip-path: inset(0 0 0 0 round 0px);
+        /* clip-path : polygon(0 0,100% 0,100% 100%); */
     }
 
     .indicators {
@@ -116,6 +121,10 @@ export default {
         display : flex;
         justify-content: center;
         height : 400px;
+        transition : ease-in-out all 0.5s;
+    }
+    .inner-carousel-expanded {
+        opacity : 0;
     }
     .indicator {
         width : 10px;

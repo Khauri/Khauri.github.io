@@ -29,17 +29,24 @@
                     Contact
                 </div>
             </div>
+            <canvas-drip :width="720" :height="500"/>
         </div>
     </div>
 </template>
 
 <script>
-import { NavBar } from '@/components'
+import { NavBar, CanvasDrip } from '@/components'
 import about from '../About'
 import slide from './Slide'
 import carousel from './Carousel'
 export default {
-    components : { NavBar, slide, carousel, about }
+    components : { 
+        NavBar, 
+        CanvasDrip,
+        slide, 
+        carousel, 
+        about
+    }
 }
 </script>
 
@@ -60,11 +67,13 @@ export default {
     .content-wrapper{
         /** Relative Positioning Here is pretty important */ 
         position : relative;
+        z-index : 99;
         display : flex;
         flex-direction: column;
         justify-content: center;
         width : 100%;
         height : 100%;
+        overflow : hidden;
 
     }
     .section-nav {
@@ -76,7 +85,6 @@ export default {
         position : absolute;
         top : 400px;
         height : 60px;
-        width : 100%;
         background : #35ce8d;
         width : 720px;
         align-self : center;
@@ -86,6 +94,20 @@ export default {
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
+    }
+    .nav-tab {
+        position : relative;
+        z-index : 999;
+        cursor : pointer;
+        display : flex;
+        justify-content: center;
+        align-items: center;
+        width : 100%;
+        height : 100%;
+    }
+
+    .nav-tab:hover{
+        background-color : rgba(0,0,0,0.05);
     }
 
     .footer {

@@ -13,6 +13,7 @@
                 </div>
             </div>
         </div>
+        <article class="about-content"></article>
     </div>
 </template>
 
@@ -29,6 +30,11 @@ export default {
     .about-container {
         width : 100%;
         height : 100%;
+        display : flex;
+        flex-direction : column;
+        justify-content: center;
+        align-items: center;
+        overflow-y : scroll;
         position : relative;
         background: url('../../assets/bg2.jpg');
         background-size : cover;
@@ -37,18 +43,20 @@ export default {
     }
     .about-header {
         display : flex;
-        flex-direction : column;
-        height : 400px;
+        width : 720px;
+        min-height : 400px;
     }
-    .subsection { 
-        z-index : 1;
+    .about-content{
+        align-self:  center;
+        max-width : 720px;
+        height : 600px;
+        background : blue;
     }
     .header-text {
         z-index : 1;
         text-align : left;
         max-width : 240px;
-        padding-left : 25%;
-        padding-top : 80px;
+        margin : 80px;
     }
     .header-img{
         position : absolute;
