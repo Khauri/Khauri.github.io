@@ -2,6 +2,7 @@
     <page 
         :img="'pic.jpg'"
         :title="'Khauri McClain'"
+        :bannerColor="'#e42e00'"
         :isExpanded="isExpanded"
         class="container">
         <!-- Header -->

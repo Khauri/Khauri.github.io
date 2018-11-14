@@ -2,11 +2,12 @@
     <page 
         :isExpanded="isExpanded"
         :title="'The Lab'"
+        :bannerColor="'orange'"
         :img="'lab.png'"
         class="container">
         <!-- Header -->
         <div slot="header" class="header-text text">
-            
+            <h3>See what's brewing in the computer lab</h3>
         </div>
         <!-- Body -->
         <div slot="body">

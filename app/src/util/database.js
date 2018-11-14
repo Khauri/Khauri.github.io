@@ -38,6 +38,10 @@ export const DB = new class Database {
         return { error : null, article : { id : snap.docs[0].id, ...article} }
     }
 
+    async createArticle(data){
+        // TODO....
+    }
+
     async updateArticle(id, data){
         if(!id){
             return error('Missing article id')

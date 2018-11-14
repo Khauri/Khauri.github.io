@@ -31,6 +31,11 @@ const routes = [
     component : Screens.Blog
   },
   {
+    path: '/blog/:slug',
+    name : "Article",
+    component : Screens.Article
+  },
+  {
     path: '/login',
     name: 'Login',
     component : Screens.Login
@@ -39,6 +44,14 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component : Screens.Dashboard,
+    meta : {
+      requiresAuth : true
+    }
+  },
+  {
+    path: '/dashboard/new',
+    name: 'NewPost',
+    component : Screens.Editor,
     meta : {
       requiresAuth : true
     }

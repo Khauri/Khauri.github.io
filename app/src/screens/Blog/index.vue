@@ -2,7 +2,7 @@
     <page
         :img="'blog.png'"
         title="Blog"
-        bannerColor="blue"
+        bannerColor="#6b006c"
         :isExpanded="isExpanded"
         class="blog-container">
          <!-- Header -->
@@ -51,7 +51,6 @@ export default {
     .container {
         flex : 1;
         display : flex;
-        justify-content: center;
     }
     .content-body {
         width : 720px;  
