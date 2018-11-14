@@ -1,8 +1,11 @@
 <template>
-    <transition name="slide">
-        <div :class="['carousel-slide', isExapnded ? 'carousel-slide-expanded' : '']" v-if="isActive">
-            <slot></slot>
-        </div>
+    <transition 
+        :name="`${slideDirection}-slide`">
+            <div 
+                v-show="isActive" 
+                :class="['carousel-slide', isExapnded ? 'carousel-slide-expanded' : '']">
+                <slot></slot>
+            </div>
     </transition>
 </template>
 
@@ -16,39 +19,61 @@ export default {
         },
         isExapnded : function(){
             return this.carousel.isExpanded
-        }
+        },
+        slideDirection : function(){
+            return this.carousel.slideDirection
+        },
     },
-    mounted(){
-        // console.log(this.tabLabel)
-    },
+    
     data : function(){
         return {
-            _isCarouselSlide : true
+            _isCarouselSlide : true,
         }
     }
 }
 </script>
 
 <style>
-    .slide-enter { 
+    /** Transition slide -> left **/ 
+    .left-slide-enter { 
         transform : translate(100%);
     }
-    .slide-enter-to { 
+    .left-slide-enter-to { 
         transform : translate(0%);
     }
 
-    .slide-leave { 
+    .left-slide-leave { 
         transform : translate(0%);
     }
     
-    .slide-leave-to { 
+    .left-slide-leave-to { 
         transform : translate(-100%);
     }
 
-    .slide-enter-active, .slide-leave-active { 
+    /** Transition slide -> right **/ 
+    .right-slide-enter { 
+        transform : translate(-100%);
+    }
+    .right-slide-enter-to { 
+        transform : translate(0%);
+    }
+
+    .right-slide-leave { 
+        transform : translate(0%);
+    }
+    
+    .right-slide-leave-to { 
+        transform : translate(100%);
+    }
+
+    .left-slide-enter-active, 
+    .left-slide-leave-active, 
+    .right-slide-enter-active, 
+    .right-slide-leave-active { 
         position : absolute;
         transition: all .5s cubic-bezier(0.77, 0, 0.175, 1);
     }
+    
     .carousel-slide{
         /*  */
         width : 720px;

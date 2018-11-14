@@ -8,19 +8,20 @@
     <div class="container">
         <div class="content-wrapper">
             <carousel 
-                :loop="true" 
+                :loop="true"
+                :slideDirection="slideDirection"
                 :isExpanded="isExpanded" 
                 :activeTabIndex="activeTab">
-                <slide :tabLabel="`About`">
+                <slide :tabLabel="`about`">
                     <about :isExpanded="isExpanded"/>
                 </slide>
-                <slide :tabLabel="`Projects`">
+                <slide :tabLabel="`lab`">
                     <projects :isExpanded="isExpanded"/>
                 </slide>
-                <slide :tabLabel="`About`">
+                <slide :tabLabel="`blog`">
                     <blog :isExpanded="isExpanded"/>
                 </slide>
-                <slide :tabLabel="`About`">
+                <slide :tabLabel="`contact`">
                     <contact :isExpanded="isExpanded"/>
                 </slide>
             </carousel>
@@ -34,8 +35,6 @@
                     {{tab}}
                 </div>
             </div>
-            <!-- <div class="footer">Hey! Look. Listen man...</div> -->
-            <canvas-drip :width="720" :height="500"/>
         </div>
     </div>
 </template>
@@ -59,21 +58,37 @@ export default {
         blog, 
         contact
     },
+    props : {
+        isExpanded : {
+            default : false,
+            type : Boolean
+        }
+    },
     data(){
         return {
-            isExpanded : false,
             navTabs : ['About', 'Projects', 'Blog', 'Contact'],
+            slideDirection : 'right',
             activeTab : 0,
             carouselLoopTime : 5 * 1000
         }
     },
 
     methods : {
-        nextSlide(){
-            this.activeTab = ( this.activeTab + 1 ) % this.navTabs.length
-            setTimeout(this.nextSlide, this.carouselLoopTime)
+        toggleExpansion(page){
+            // TODO: Remove transition animations and just jump
+            this.isExpanded = !this.isExpanded
         },
-        gotoSlide(slide){
+        nextSlide(){
+            this.slideDirection = "left"
+            this.activeTab = ( this.activeTab + 1 ) % this.navTabs.length
+            this.timeout = setTimeout(this.nextSlide, this.carouselLoopTime)
+        },
+        gotoSlide(slide = 0){
+            if(slide > this.activeTab){
+                this.slideDirection = "left"
+            } else {
+                this.slideDirection = "right"
+            }
             this.activeTab = slide
             this.resetTimer()
         },

@@ -36,6 +36,9 @@ export default {
             default : false, 
             type : Boolean
         },
+        slideDirection : {
+            default : 'right',
+        },
         activeTabIndex : {
             default : 0,
             type : Number
