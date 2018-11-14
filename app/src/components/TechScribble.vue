@@ -180,6 +180,11 @@ export default {
             default : 20
         },
 
+        restartAfter : {
+            type : Number, 
+            default : -1
+        },
+
         totalTraces : {
             type : Number, 
             default : 100,
@@ -247,11 +252,17 @@ export default {
 
     mounted(){
         this.reinit()
+        if(this.restartAfter > 0){
+            this.interval = setInterval(this.reinit, this.restartAfter)
+        }
     },
 
     beforeDestroy(){
         if(this.reqAnimFrameInstance){
             cancelAnimationFrame(this.reqAnimFrameInstance);
+        }
+        if(this.interval){
+            clearInterval(this.interval)
         }
     }
 }

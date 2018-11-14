@@ -1,74 +1,86 @@
 <template>
-  <div id="app">
-    <div class="root">
-      <div class="section-nav">
-          <NavBar />
-      </div>
-      <div class="router-content">
-        <transition name="fade">
-          <router-view/>
-        </transition>
-      </div>
+    <div id="app">
+        <div class="root">
+            <tech-scribble 
+              class="tech-scribble"
+              traceColor="rgba(0,0,0,0.12)"
+              traceFillColor="transparent"
+              :restartAfter="loopTime"
+              :width="dim.width" 
+              :height="dim.height"/>
+            <div class="router-content">
+                <router-view/>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-  import { NavBar } from '@/components'
-  export default {
+export default {
     name: 'App',
-    components : {NavBar}
-  }
+    computed : {
+        dim(){
+            return {
+                width : document.body.clientWidth + 30,
+                height : document.body.clientHeight + 30
+            }
+        }
+    },
+    data(){
+        return {
+            loopTime : 8 * 1000
+        }
+    }
+}
 </script>
 
 <style>
-  #app, body, html {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin : 0;
-    padding : 0;
-    width : 100%;
-    height : 100%;
-  }
-  .section-nav {
-    width : 720px;
-  }
-  .root {
+#app, body, html {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color : var(--text0);
+  margin : 0;
+  padding : 0;
+  width : 100%;
+  height : 100%;
+}
+
+:root {
+    --bg-color: #f0f0f0;
+    --bg-color-inv: #000;
+    --text0: rgba(0,0,0,.8);
+    --text1: rgba(0,0,0,.66);
+    --text3: rgba(0,0,0,.38);
+    --text-inv0: #fff;
+    --text-inv1: hsla(0,0%,100%,.7);
+    --text-inv2: hsla(0,0%,100%,.5);
+    --scheme0: #e42e00;
+    --scheme1: #fffc00;
+    --scheme2: #6b006c;
+}
+
+.root {
     width : 100%;
     height : 100%;
     overflow : hidden;
     display : flex;
     flex-direction : column;
     align-items: center;
-    background : rgba(0,0,0,.12);
-  }
-  .router-content {
+    background : var(--bg-color);
+}
+
+.tech-scribble {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    z-index: 8;
+}
+
+.router-content {
     position : relative;
     width : 100%;
     height : 100%;
-  }
-  /** Quick n' Dirty Route Transitions */ 
-  .fade-enter {
-    opacity : 0;
-  }
-  .fade-enter-to {
-    opacity : 1;
-  }
-  .fade-leave {
-    opacity : 1;
-  }
-  .fade-leave-to {
-    opacity : 0;
-  }
-  .fade-enter-active, .fade-leave-active {
-    position : absolute;
-    top : 0;
-    left : 0;
-    right : 0;
-    bottom : 0;
-    transition : ease-in-out all .5s;
-  }
+}
 </style>
