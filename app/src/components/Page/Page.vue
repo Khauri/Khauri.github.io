@@ -1,10 +1,22 @@
 <template>
-    <div class="page">
-        <slot></slot>
+    <div class="page-container">
+        <page-header
+            :img="img"
+            :isExpanded="isExpanded">
+                <slot name="header"></slot>
+        </page-header>
+        <page-body 
+            :isExpanded="isExpanded">
+            <slot name="body"></slot>
+        </page-body>
     </div>
 </template>
 
 <script>
+
+import PageBody from './PageBody' 
+import PageHeader from './PageHeader'
+
 export default {
     name : 'page',
     provide(){
@@ -13,6 +25,13 @@ export default {
         }
     },
     props : {
+        img : {
+            type : String,
+        },
+        isExpanded : {
+            default : true,
+            type : Boolean
+        },
         isHidden : {
             default : false, 
             type : Boolean
