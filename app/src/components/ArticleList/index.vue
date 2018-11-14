@@ -42,6 +42,9 @@ export default {
             type : Number,
             default : 0
         },
+        tags : {
+            type : Array
+        },
         results : {
             type : Number,
             default : 10
@@ -78,7 +81,7 @@ export default {
     },
     methods : {
         async fetchData(){
-            let response = await DB.listArticles({})
+            let response = await DB.listArticles({tags:this.tags})
             this.loadedArticles = response
         },
         selectArticle(article){
