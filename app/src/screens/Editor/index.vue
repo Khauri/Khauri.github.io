@@ -22,11 +22,9 @@
 </template>
 
 <script>
-import { NavBar, Showdown} from '@/components'
 import { DB } from '@/util'
 
 export default {
-    components : {NavBar, Showdown},
     // Load the thing to edit before entering this route
     async beforeRouteEnter (to, from, next) {
         let {error, data, ref} = await DB.getArticleBySlug(to.params.slug)

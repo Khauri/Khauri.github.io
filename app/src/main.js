@@ -25,6 +25,7 @@ library.add(
   faAsterisk
 )
 Vue.component('fa', FontAwesomeIcon)
+// For registering global components automatically
 const globalComponents = {}
 for(let key in components){
   let component = components[key]
@@ -45,6 +46,8 @@ const config = {
 }
 
 firebase.initializeApp(config)
+// Silence dumb warning about timestamps
+firebase.firestore().settings({timestampsInSnapshots:true});
 // Ensure firebase auth state is ready before creating the rest of the application
 let unsub = firebase.auth().onAuthStateChanged( (user) => {
   new Vue({

@@ -20,7 +20,7 @@
 
 <script>
 export default {
-    name : "ProjecsPage",
+    name : "Projects",
     props : {
         isExpanded : {
             default : true,

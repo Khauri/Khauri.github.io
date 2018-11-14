@@ -7,7 +7,10 @@
 <template>
     <div class="container">
         <div class="content-wrapper">
-            <carousel :loop="true" :isExpanded="isExpanded" :activeTabIndex="activeTab">
+            <carousel 
+                :loop="true" 
+                :isExpanded="isExpanded" 
+                :activeTabIndex="activeTab">
                 <slide :tabLabel="`About`">
                     <about :isExpanded="isExpanded"/>
                 </slide>
