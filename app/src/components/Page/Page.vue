@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    name : 'page',
     provide(){
         return {
             page : this

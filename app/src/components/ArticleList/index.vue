@@ -20,9 +20,9 @@
 
 <script>
 import { DB } from '@/util'
-import {Page, PageHeader, PageBody} from '@/components'
 
 export default {
+    name : 'article-list',
     props : {
         page : {
             type : Number,
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style scoped>
-    .container {
+.container {
 
-    }
+}
 </style>

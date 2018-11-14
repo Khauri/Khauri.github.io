@@ -29,6 +29,7 @@ const globalComponents = {}
 for(let key in components){
   let component = components[key]
   if(component.name){
+    console.log(component)
     globalComponents[name] = component
   }
 }

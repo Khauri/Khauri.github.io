@@ -8,6 +8,7 @@
 
 <script>
 export default {
+    name : 'page-body',
     inject : ['page']
 }
 </script>

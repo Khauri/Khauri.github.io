@@ -28,6 +28,7 @@
 import firebase from 'firebase'
 
 export default {
+    name : 'navbar',
     methods : {
         async signOut(){
             await firebase.auth().signOut()
