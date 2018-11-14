@@ -1,8 +1,8 @@
 <template>
     <page 
-        :headerImg="'contact.png'"
+        :img="'contact.png'"
         :isExpanded="isExpanded"
-        class="about-container">
+        class="container">
         <!-- Header -->
         <div 
             slot="header" 
@@ -18,22 +18,19 @@
             </div>
         </div>
         <!-- Body -->
-        <article-view slot="body" slug="about-me"/>
         <!-- Footer(?) -->
     </page>
 </template>
 
 <script>
-import {Page, PageHeader, PageBody, ArticleView} from '@/components'
 export default {
-    name : "AboutPage",
+    name : "Contact",
     props : {
         isExpanded : {
             default : true,
             type : Boolean
         }
     },
-    components : { Page, PageHeader, PageBody, ArticleView },
     data(){
         return {}
     },
@@ -41,7 +38,7 @@ export default {
 </script>
 
 <style>
-    .about-container {
+    .container {
         color : white;
         /* background: url('../../assets/bg2.jpg'); */
         background-size : cover;

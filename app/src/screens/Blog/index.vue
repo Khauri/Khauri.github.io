@@ -1,6 +1,6 @@
 <template>
     <page
-        :headerImg="'blog.png'"
+        :img="'blog.png'"
         :isExpanded="isExpanded"
         class="blog-container">
          <!-- Header -->

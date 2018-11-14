@@ -14,6 +14,12 @@
                 <slide :tabLabel="`Projects`">
                     <projects :isExpanded="isExpanded"/>
                 </slide>
+                <slide :tabLabel="`About`">
+                    <blog :isExpanded="isExpanded"/>
+                </slide>
+                <slide :tabLabel="`About`">
+                    <contact :isExpanded="isExpanded"/>
+                </slide>
             </carousel>
             <div class="navigation" v-if="!isExpanded">
                 <div 
@@ -35,6 +41,9 @@
 import { CanvasDrip } from '@/components'
 import about from '../About'
 import projects from '../Projects'
+import contact from '../Contact' 
+import blog from '../Blog'
+
 import slide from './Slide'
 import carousel from './Carousel'
 export default {
@@ -43,7 +52,9 @@ export default {
         slide, 
         carousel, 
         about,
-        projects
+        projects,
+        blog, 
+        contact
     },
     data(){
         return {

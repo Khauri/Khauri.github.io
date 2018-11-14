@@ -1,24 +1,24 @@
 <template>
-    <page class="project-container">
+    <page 
+        :isExpanded="isExpanded"
+        :img="'lab.png'"
+        class="container">
         <!-- Header -->
-        <page-header :img='"pic2.jpg"' :isExpanded="isExpanded">
-            <div class="header-text text">
-                <h1 class="header-title">The Lab</h1>
-            </div>
-        </page-header>
+        <div slot="header" class="header-text text">
+            <h1 class="header-title">The Lab</h1>
+        </div>
         <!-- Body -->
-        <page-body>
+        <div slot="body">
             <h1>In The Lab</h1>
             <p>
                Here's some projects I've been working on!
             </p>
-        </page-body>
+        </div>
         <!-- Footer(?) -->
     </page>
 </template>
 
 <script>
-import {Page, PageHeader, PageBody} from '@/components'
 export default {
     name : "ProjecsPage",
     props : {
@@ -27,15 +27,14 @@ export default {
             type : Boolean
         }
     },
-    components : { Page, PageHeader, PageBody },
     data(){
         return {}
     },
 }
 </script>
 
-<style>
-    .project-container {
+<style scoped>
+    .container {
         color : white;
         background : transparent;
     }
