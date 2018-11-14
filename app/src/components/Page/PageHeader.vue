@@ -1,8 +1,11 @@
 <template>
-    <div :class="['container', isExpanded ? 'expanded' : '']">
+    <div :class="['container', isExpanded && 'expanded', !showHeader && 'mini']">
         <div class="spacer" v-if="!isExpanded" />
         <transition name="fade">
-            <navbar :class="['navbar', isScrolled && 'scrolled']" v-show="isExpanded"/>
+            <navbar 
+                :miniMode="!showHeader" 
+                :class="['navbar', isScrolled && 'scrolled']" 
+                v-show="isExpanded"/>
         </transition>
         <div class="header-bg">
             <img
@@ -32,6 +35,10 @@ export default {
         title : {},
         titleColor : {default:'white'},
         bannerColor : {},
+        showHeader : {
+            default : true,
+            type : Boolean
+        },
         isExpanded : {
             default : true, 
             type : Boolean
@@ -59,6 +66,10 @@ export default {
     .container.expanded {
         min-height : 250px;
         height : 250px;
+    }
+    .container.mini {
+        min-height : 50px;
+        height : 50px;
     }
 
     h1 {

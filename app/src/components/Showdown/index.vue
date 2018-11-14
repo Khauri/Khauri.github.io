@@ -7,6 +7,7 @@
         <div class="controls">
             <div class="left">
                 <slot name="left"></slot>
+                <p class="doc-status">UNSAVED</p>
             </div>
             <div class="middle">
                 <slot name="middle"></slot>
@@ -18,19 +19,19 @@
                 </button>
                 <button 
                     @click="emitResult()">
-                    Submit
+                    <fa class="sm-icon" :icon="['fa','save']"/> Save 
                 </button>
             </div>
         </div>
         <div :class="['wrapper', `wrapper-${previewStyle}`]">
-            <div class="editor" v-if="isShowingEditor">
+            <div class="editor" v-show="isShowingEditor">
                 <textarea 
                     class="editor-textarea" 
                     v-model="text"/>
             </div>
             <div 
                 :class="['preview', previewClass, previewStyle]" 
-                v-if="isShowingPreview">
+                v-show="isShowingPreview">
                     <article-view :inputArticle="article"/>
             </div>
         </div>
@@ -54,6 +55,7 @@ const converter = new showdown.Converter({
 })
 
 export default {
+    name : 'showdown',
     provide(){
         return {
             showdown : this
@@ -138,18 +140,27 @@ export default {
         flex-direction : column;
     }
     .controls {
+        position : sticky;
+        background : #f0f0f0;
         flex : 0;
         min-height : 50px;
         width : 100%;
         display : flex;
         align-items : center;
-        justify-content: space-evenly;
+        justify-content: space-between;
+    }
+    .controls .left, .controls .right {
+        display : flex;
+        align-items : center;
+        flex-direction : row;
+    }
+    .doc-status {
+        color : var(--text3);
     }
     .wrapper {
         display : flex;
-        flex : 1;
-        /* width : 100%;
-        height : 100%; */
+        width : 100%;
+        height : 100%;
         flex-direction : column;
     }
     .wrapper-preview-left, .wrapper-preview-right {
@@ -161,17 +172,21 @@ export default {
         width : 100%;
         height : 100%;
         background : white;
-        padding : 10px;
-        border : 1px solid rgba(0,0,0,0.3);
+        border : 1px solid rgba(0,0,0,0.1);
         display : flex;
     }
     .editor-textarea {
-        flex : 1;
-        /* width : 100%;
-        height : 100%; */
         background : transparent;
+        height : 100%;
+        width : 100%;
         border : 0px;
         font-size : 1em;
+        outline-color: transparent;
+        outline-style: none;
+        resize: none;
+    }
+    .editor-textarea:focus {
+
     }
     .preview { 
         flex : 1;

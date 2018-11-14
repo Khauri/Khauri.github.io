@@ -18,8 +18,11 @@ export const DB = new class Database {
         let query = firebase.firestore()
             .collection(colls.POSTS)
         let snap = await query.get()
-        return snap.docs.map(doc=>doc.data())
+        return snap.docs.map(doc=>({
+            id:doc.id, ...doc.data()
+        }))
     }
+
     async getArticleBySlug(slug){
         if(!slug){
             return error('Slug not provided')
@@ -32,6 +35,19 @@ export const DB = new class Database {
             return error('Article not found', 404)
         }
         let article = await snap.docs[0].data()
-        return { error : null, article }
+        return { error : null, article : { id : snap.docs[0].id, ...article} }
+    }
+
+    async updateArticle(id, data){
+        if(!id){
+            return error('Missing article id')
+        }
+        try {
+            console.log(data)
+            await firebase.firestore().collection(colls.POSTS).doc(id).update(data)
+        }catch(error){
+            console.log(error)
+            return error(error)
+        }
     }
 }

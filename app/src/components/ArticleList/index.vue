@@ -4,7 +4,21 @@
 -->
 <template>
     <div class="container">
-        <div
+        <div v-if="listMode"
+            class="article-list-item"
+            v-for="(article, i) in articles"
+            :key="`article_${i}`"
+            @click="selectArticle(article)">
+            <div>
+                <div v-if="article.title">{{article.title}}</div>
+                <div v-if="article.lastModified">{{toDate(article.lastModified)}}</div>
+            </div>
+            <div class="article-list-controls">
+                <button>DELETE</button>
+                <button>EDIT</button>
+            </div>
+        </div>
+        <div v-else
             class="article-box" 
             v-for="(article, i) in articles" 
             :key="`article_${i}`">
@@ -38,6 +52,14 @@ export default {
         },
         select : {
             type : Function
+        },
+        listMode : {
+            default : false,
+            type : Boolean
+        },
+        fillEmpty : {
+            default : false,
+            type : Boolean
         }
     },
     computed : {
@@ -58,6 +80,13 @@ export default {
         async fetchData(){
             let response = await DB.listArticles({})
             this.loadedArticles = response
+        },
+        selectArticle(article){
+            this.$emit('select', article)
+        },
+        toDate(timestamp){
+            if(!timestamp) return "Unknown Time"
+            return timestamp.toDate().toLocaleString()
         }
     },
     // Load the articles
@@ -71,4 +100,23 @@ export default {
 .container {
 
 }
+.article-list-item {
+    padding : 10px;
+    min-height : 50px;
+    cursor : pointer;
+    display : flex;
+    flex-direction : row;
+    justify-content: space-between;
+    align-items : center;
+}
+.article-list-item:hover {
+    background : rgba(0,0,0,0.1);
+}
+
+.article-list-controls {
+    display : flex;
+    flex-direction : row;
+    justify-content : space-around;
+}
+
 </style>

@@ -5,20 +5,23 @@
             Create/Edit/Delete an Article
 -->
 <template>
-    <div class="container">
-        <div class="md-editor">
+    <page 
+        :showHeader="false"
+        class="container">
+        <div slot="body" class="md-editor">
             <showdown 
                 :previewClass="'site-article'"
                 :previewLocation="previewLocation"
                 :showPreview="false"
                 :inputText="article.text"
+                :isValid="isValid"
                 @submit="save">
                 <div slot="left">
-                    <input v-model="article.title" placeholder="Title">
+                    <input class="title-input" v-model="article.title" placeholder="Title">
                 </div>
             </showdown>
         </div>
-    </div>
+    </page>
 </template>
 
 <script>
@@ -27,8 +30,11 @@ import { DB } from '@/util'
 export default {
     // Load the thing to edit before entering this route
     async beforeRouteEnter (to, from, next) {
-        let {error, data, ref} = await DB.getArticleBySlug(to.params.slug)
-        next( vm => vm.setData(error, data, ref))
+        if(to.params.article){
+            return next( vm => vm.setArticle(null, to.params.article))
+        }
+        let {error, article} = await DB.getArticleBySlug(to.query.slug)
+        next( vm => vm.setArticle(error, article) )
     },
     // when route changes and this component is already rendered,
     async beforeRouteUpdate (to, from, next) {
@@ -38,6 +44,10 @@ export default {
     },
 
     beforeRouteLeave (to, from, next) {
+        if(this.isValid){
+            return next()
+        }
+        // Ask if should save changes
         const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
         if (answer) {
             next()
@@ -53,27 +63,24 @@ export default {
             title : undefined,
             inputText : '',
             dbRef : null,
-            unsavedChanges : false
+            unsavedChanges : false,
+            isValid : false
         }
     },
 
     methods : {
         async create(d){
-            try {
-                let { data, ref } = await DB.createArticle({
-                    title : this.article.title,
-                    ...d
-                })
-                this.dbRef = ref
-                // virtually update the window route
-                window.history.pushState(null,{},`/dashboard/edit/${data.slug}`)
-            } catch (error) {
-                // article already exists most likely
-            }
+            let { error, article } = await DB.createArticle({
+                title : this.article.title,
+                ...d
+            })
+            // virtually update the window route
+            window.history.pushState(null,{},`/dashboard/edit?slug=${data.slug}`)
         },
 
         async update(data){
-            await DB.updateArticle(this.dbRef, {title : this.article.title, ...data})
+            await DB.updateArticle(this.article.id, {title : this.article.title, ...data})
+            this.isValid = true
             // Display "Saved" feedback
         },
 
@@ -83,38 +90,46 @@ export default {
                 console.error("Missing Title")
                 return
             }
-            if(!this.dbRef){
+            if(!this.article.id){
                 this.create(data)
             }else{
                 this.update(data)
             }
+            console.log("Saved")
         },
 
-        setData(error, data, ref){
+        setArticle(error, article){
             if(error){
                 console.log(error)
                 return
                 // Redirect or crash(?)
             }
-            this.dbRef = ref
-            this.article = { title:data.title, text:data.text}
+            // this.dbRef = ref
+            this.article = article
         }
     }
 }
 </script>
 
 <style scoped>
-    .container {
-        position : relative;
-        width : 100%;
-        height : 100%;
-        display : flex;
-        justify-content: center;
-        overflow : scroll;
-    }
-    .md-editor {
-        width : 720px;
-        height : 100%;
-        padding : 0 10px;
-    }
+.container {
+    position : relative;
+    height : 100%;
+}
+.md-editor {
+    height : 480px;
+}
+.title-input{
+    padding : 5px;
+    margin : 0 8px;
+    background : transparent;
+    outline : none;
+    border : none;
+    border-bottom : 1px solid rgba(0,0,0,0.12);
+    outline-color: transparent;
+    outline-style: none;
+}
+.title-input:focus{
+    background : white;
+}
 </style>

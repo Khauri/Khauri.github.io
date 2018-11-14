@@ -4,7 +4,7 @@ import Vue from 'vue'
 import firebase from 'firebase'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faGraduationCap, faHandRock, faAsterisk } from '@fortawesome/free-solid-svg-icons'
+import { faGraduationCap, faHandRock, faAsterisk, faSave, faTrash, faCode } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faGithub, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import * as components from '@/components'
 
@@ -20,6 +20,9 @@ library.add(
   faTwitter, 
   faInstagram,
   // Other stuff 
+  faSave,
+  faTrash,
+  faCode, 
   faGraduationCap,
   faHandRock,
   faAsterisk

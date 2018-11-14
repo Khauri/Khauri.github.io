@@ -2,33 +2,51 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase'
 
-import { Home, ErrorPage, Login, Dashboard, About, Projects } from '@/screens'
+import * as Screens from '@/screens'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Screens.Home
   },
   {
     path: '/about-me',
     name: 'About',
-    component: About
+    component: Screens.About
   },
   {
     path: '/projects',
     name : "Projects",
-    component : Projects
+    component : Screens.Projects
+  },
+  {
+    path: '/contact',
+    name : "Contact",
+    component : Screens.Contact
+  },
+  {
+    path: '/blog',
+    name : "Blog",
+    component : Screens.Blog
   },
   {
     path: '/login',
     name: 'Login',
-    component : Login
+    component : Screens.Login
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component : Dashboard,
+    component : Screens.Dashboard,
+    meta : {
+      requiresAuth : true
+    }
+  },
+  {
+    path: '/dashboard/edit',
+    name: 'Editor',
+    component : Screens.Editor,
     meta : {
       requiresAuth : true
     }
@@ -36,7 +54,7 @@ const routes = [
   {
     path: '*',
     name: '404',
-    component : ErrorPage
+    component : Screens.ErrorPage
   },
 ]
 

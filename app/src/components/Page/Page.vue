@@ -1,6 +1,7 @@
 <template>
     <div ref="root" class="page-container">
         <page-header
+            :showHeader="showHeader"
             :img="img"
             :title="title"
             :bannerColor="bannerColor"
@@ -35,6 +36,10 @@ export default {
         },
         title : {
             type : String,
+        },
+        showHeader : {
+            default : true,
+            type : Boolean
         },
         bannerColor : {},
         titleColor : {},

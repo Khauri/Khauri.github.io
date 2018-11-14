@@ -1,7 +1,9 @@
 <template>
     <div class="nav-root">
         <div class="header">
-            <router-link to="/" class="nav-header">
+            <router-link
+                to="/" 
+                class="nav-header">
                 <h3>KM</h3>
             </router-link>
         </div>
@@ -18,6 +20,9 @@
             <router-link class="nav-link" to="/contact">
                 CONTACT
             </router-link>
+            <router-link v-if="isLoggedIn" class="nav-link" to="/dashboard">
+                DASHBOARD
+            </router-link>
             <!-- <a href="#" class="nav-link" @click="signOut">Sign Out</a> -->
         </div>
         
@@ -29,6 +34,20 @@ import firebase from 'firebase'
 
 export default {
     name : 'navbar',
+    props : {
+        miniMode : {
+            default : false,
+            type : Boolean
+        }
+    },
+    computed : {
+        isLoggedIn(){
+            return !!firebase.auth().currentUser
+        }
+    },
+    mounted(){
+
+    },
     methods : {
         async signOut(){
             await firebase.auth().signOut()
