@@ -6,7 +6,7 @@
         :isExpanded="isExpanded"
         class="blog-container">
          <!-- Header -->
-        <div slot="header" class="header-text text">
+        <div slot="header">
             <h3 class="header-title">Provacative topics from a provacative mind</h3>
         </div>
         <!-- Body -->

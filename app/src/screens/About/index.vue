@@ -34,7 +34,6 @@ export default {
 <style scoped>
     .container {
         color : white;
-        /* background: url('../../assets/bg2.jpg'); */
         background-size : cover;
         background-repeat:   no-repeat;
         background-position : center center;

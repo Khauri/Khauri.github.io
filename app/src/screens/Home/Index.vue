@@ -35,6 +35,9 @@
                     {{tab}}
                 </div>
             </div>
+            <div class="quickems" v-if="!expanded">
+                <h3>Download Resume</h3>
+            </div>
         </div>
     </div>
 </template>
@@ -161,6 +164,17 @@ export default {
         align-items: center;
         justify-content: space-evenly;
         background: linear-gradient(0deg,silver 0, var(--bg-color));
+    }
+    .quickems {
+        position : absolute;
+        display : flex;
+        justify-content: center;
+        align-items: center;
+        top : 450px;
+        height : 50px;
+        width : 100%;
+        z-index : 999;
+        color : var(--text3)
     }
     .nav-tab {
         position : relative;

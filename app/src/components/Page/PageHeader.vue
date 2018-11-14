@@ -2,7 +2,7 @@
     <div :class="['container', isExpanded ? 'expanded' : '']">
         <div class="spacer" v-if="!isExpanded" />
         <transition name="fade">
-            <navbar class="navbar" v-show="isExpanded"/>
+            <navbar :class="['navbar', isScrolled && 'scrolled']" v-show="isExpanded"/>
         </transition>
         <div class="header-bg">
             <img
@@ -34,6 +34,10 @@ export default {
         bannerColor : {},
         isExpanded : {
             default : true, 
+            type : Boolean
+        },
+        isScrolled : {
+            default : false,
             type : Boolean
         }
     }
@@ -105,9 +109,13 @@ export default {
         opacity : 1;
     }
     .fade-leave {
+        position : absolute;
+        top : 0;
         opacity : 1;
     }
     .fade-leave-to {
+        position : absolute;
+        top : 0;
         opacity : 0;
     }
     .spacer {
@@ -121,9 +129,11 @@ export default {
         top : 0;
         width : 720px;
         color : white;
-        transition : ease-in-out all 1s;
+        transition : ease-in-out all 1s, ease-out background-color .2s;
+        z-index : 9999;
     }
-    .navbar.isScrolling {
-        background : white;
+    .navbar.scrolled {
+        background : rgba(255,255,255,0.95);
+        color : var(--text0);
     }
 </style>

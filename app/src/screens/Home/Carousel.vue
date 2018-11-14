@@ -139,6 +139,7 @@ export default {
         justify-content: center;
         height : 400px;
         transition : ease-out all 0.5s;
+        z-index : 9999;
     }
     .inner-carousel-expanded {
         opacity : 0;
