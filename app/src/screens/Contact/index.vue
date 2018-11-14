@@ -5,8 +5,7 @@
         class="container">
         <!-- Header -->
         <div 
-            slot="header" 
-            class="header-text text">
+            slot="header">
             <h1 class="header-title">Contact Me</h1>
             <p>kmcclain@email.wm.edu</p>
             <p>khauri7five7@gmail.com</p>
@@ -50,12 +49,6 @@ export default {
         max-width : 720px;
         height : 600px;
         background : blue;
-    }
-    .header-text {
-        z-index : 1;
-        text-align : left;
-        max-width : 240px;
-        margin : auto 80px;
     }
     .sm-icon {
         cursor : pointer;

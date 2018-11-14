@@ -68,7 +68,7 @@ export default {
     .title-banner {
         position: absolute;
         z-index: -1;
-        left: 0;
+        left: -20px;
         right: -10px;
         background: var(--scheme0);
         -webkit-clip-path: polygon(100% 0,94% 50%,100% 100%,0 100%,0 50%,0 0);
