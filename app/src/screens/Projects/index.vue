@@ -1,18 +1,16 @@
 <template>
     <page 
         :isExpanded="isExpanded"
+        :title="'The Lab'"
         :img="'lab.png'"
         class="container">
         <!-- Header -->
         <div slot="header" class="header-text text">
-            <h1 class="header-title">The Lab</h1>
+            
         </div>
         <!-- Body -->
         <div slot="body">
-            <h1>In The Lab</h1>
-            <p>
-               Here's some projects I've been working on!
-            </p>
+            <p> Here's some projects I've been working on!</p>
         </div>
         <!-- Footer(?) -->
     </page>

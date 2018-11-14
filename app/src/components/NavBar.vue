@@ -43,8 +43,7 @@ export default {
         margin : 0;
     }
     .nav-root {
-        padding : 20px 0px;
-        color : rgba(0,0,0,.8);
+        min-height : 50px;
         display : flex;
         flex-direction: row;
         justify-content: space-between;
@@ -54,12 +53,16 @@ export default {
         color : inherit;
         text-decoration-line : none;
     }
+    .header, .links {
+        padding : 0 20px;
+    }
     .nav-link {
         color : inherit;
+        opacity : 0.8;
         text-decoration-line: none;
         margin : 0 3px;
     }
     .nav-link:hover{
-        color : #6BA292;
+        opacity : 1;
     }
 </style>

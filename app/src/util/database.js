@@ -4,7 +4,7 @@
 import firebase from 'firebase'
 
 const colls = {
-    POSTS : 'POSTS'
+    POSTS : 'posts'
 }
 
 // Formats the error message.

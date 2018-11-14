@@ -142,6 +142,7 @@ export default {
     }
     .inner-carousel-expanded {
         opacity : 0;
+        pointer-events: none;
     }
     .indicator {
         width : 10px;

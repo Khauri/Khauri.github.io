@@ -1,11 +1,13 @@
 <template>
     <page
         :img="'blog.png'"
+        title="Blog"
+        bannerColor="blue"
         :isExpanded="isExpanded"
         class="blog-container">
          <!-- Header -->
         <div slot="header" class="header-text text">
-            <h1 class="header-title">Blog</h1>
+            <h3 class="header-title">Provacative topics from a provacative mind</h3>
         </div>
         <!-- Body -->
         <div slot="body">
@@ -16,13 +18,8 @@
 </template>
 
 <script>
-import {Page, PageHeader, PageBody, ArticleList} from '@/components'
-
 export default {
-    components : { Page, PageHeader, PageBody, ArticleList },
-
     async beforeRouteEnter(to, from, next){
-        // Get all the articles (based on params?)
         // console.log(to.params)
         next()
     },

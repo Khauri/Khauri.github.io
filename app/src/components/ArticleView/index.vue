@@ -30,11 +30,12 @@ export default {
             return
         }
         // Load the article from the database
-        let {error, data, ref} = await DB.getArticleBySlug(this.slug)
+        let {error, article} = await DB.getArticleBySlug(this.slug)
         if(error){
+            console.log(error)
             return
         }
-        this.loadedArticle = data
+        this.loadedArticle = article
     }
 }
 </script>

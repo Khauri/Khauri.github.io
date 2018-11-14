@@ -2,6 +2,9 @@
     <div class="page-container">
         <page-header
             :img="img"
+            :title="title"
+            :bannerColor="bannerColor"
+            :titleColor="titleColor"
             :isExpanded="isExpanded">
                 <slot name="header"></slot>
         </page-header>
@@ -28,6 +31,11 @@ export default {
         img : {
             type : String,
         },
+        title : {
+            type : String,
+        },
+        bannerColor : {},
+        titleColor : {},
         isExpanded : {
             default : true,
             type : Boolean
@@ -40,15 +48,15 @@ export default {
 }
 </script>
 
-<style>
-    .page {
-        position : relative;
-        width : 100%;
-        height : 100%;
-        overflow-y : auto;
-        /* Positioning */
-        display : flex;
-        flex-direction : column;
-        align-items: center;
-    }
+<style scoped>
+.page-container {
+    position : relative;
+    width : 100%;
+    height : 100%;
+    overflow-y : auto;
+    /* Positioning */
+    display : flex;
+    flex-direction : column;
+    align-items: center;
+}
 </style>

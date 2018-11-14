@@ -6,31 +6,31 @@
 -->
 <template>
     <div class="container">
-        <div class="content-wrapper">
+        <div :class="['content-wrapper', expanded && 'expanded']">
             <carousel 
                 :loop="true"
                 :slideDirection="slideDirection"
-                :isExpanded="isExpanded" 
+                :isExpanded="expanded" 
                 :activeTabIndex="activeTab">
                 <slide :tabLabel="`about`">
-                    <about :isExpanded="isExpanded"/>
+                    <about :isExpanded="expanded"/>
                 </slide>
                 <slide :tabLabel="`lab`">
-                    <projects :isExpanded="isExpanded"/>
+                    <projects :isExpanded="expanded"/>
                 </slide>
                 <slide :tabLabel="`blog`">
-                    <blog :isExpanded="isExpanded"/>
+                    <blog :isExpanded="expanded"/>
                 </slide>
                 <slide :tabLabel="`contact`">
-                    <contact :isExpanded="isExpanded"/>
+                    <contact :isExpanded="expanded"/>
                 </slide>
             </carousel>
-            <div class="navigation" v-if="!isExpanded">
+            <div class="navigation" v-if="!expanded">
                 <div 
                     class="nav-tab" 
                     v-for="(tab, index) in navTabs" 
                     :key="`tab-${index}`"
-                    @click="isExpanded = true"
+                    @click="toggleExpansion"
                     @mouseover="gotoSlide(index)">
                     {{tab}}
                 </div>
@@ -69,14 +69,16 @@ export default {
             navTabs : ['About', 'Projects', 'Blog', 'Contact'],
             slideDirection : 'right',
             activeTab : 0,
+            expanded : this.isExpanded,
             carouselLoopTime : 5 * 1000
         }
     },
 
     methods : {
         toggleExpansion(page){
-            // TODO: Remove transition animations and just jump
-            this.isExpanded = !this.isExpanded
+            // TODO: Remove transition animations and just jump to clicked page
+            this.expanded = !this.expanded
+            this.clearTimer()
         },
         nextSlide(){
             this.slideDirection = "left"
@@ -131,7 +133,8 @@ export default {
     }
     .content-wrapper{
         /** Relative Positioning Here is pretty important */ 
-        position : relative;
+        position : absolute;
+        top : calc(50% - 500px / 2);
         z-index : 99;
         display : flex;
         flex-direction: column;
@@ -139,14 +142,16 @@ export default {
         width : 100%;
         height : 100%;
         overflow : hidden;
-
+        transition : ease-in-out all .5s;
     }
-    
+    .content-wrapper.expanded{
+        top : 0;
+    }
     .navigation {
         position : absolute;
         top : 400px;
         height : 60px;
-        background : #35ce8d;
+        background : var(--bg-color);
         width : 720px;
         align-self : center;
         border-radius : 0 0 4px 4px;
@@ -155,6 +160,7 @@ export default {
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
+        background: linear-gradient(0deg,silver 0, var(--bg-color));
     }
     .nav-tab {
         position : relative;
@@ -165,10 +171,11 @@ export default {
         align-items: center;
         width : 100%;
         height : 100%;
+        color: var(--text1);
     }
 
     .nav-tab:hover{
-        background-color : rgba(0,0,0,0.05);
+        background-color : rgba(0,0,0,0.1);
     }
 
     .footer {

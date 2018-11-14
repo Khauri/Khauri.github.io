@@ -1,14 +1,14 @@
 <template>
     <page 
         :img="'pic.jpg'"
+        :title="'Khauri McClain'"
         :isExpanded="isExpanded"
         class="container">
         <!-- Header -->
         <div 
-            slot="header" 
-            class="header-text text">
-            <h1 class="header-title">Khauri McClain</h1>
-            <p>Come meet your diversity quota</p>
+            slot="header" >
+            <h3> Software Engineer. Creative Type.</h3>
+            <p>(Come meet your diversity quota)</p>
         </div>
         <!-- Body -->
         <article-view slot="body" slug="about-me"/>
