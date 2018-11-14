@@ -30,7 +30,7 @@
                     v-for="(tab, index) in navTabs" 
                     :key="`tab-${index}`"
                     @click="isExpanded = true"
-                    @mouseover="activeTab = index">
+                    @mouseover="gotoSlide(index)">
                     {{tab}}
                 </div>
             </div>
@@ -62,10 +62,43 @@ export default {
     data(){
         return {
             isExpanded : false,
-            navTabs : ['About Me', 'Projects', 'Blog', 'Contact'],
-            activeTab : 0
+            navTabs : ['About', 'Projects', 'Blog', 'Contact'],
+            activeTab : 0,
+            carouselLoopTime : 5 * 1000
         }
-    }
+    },
+
+    methods : {
+        nextSlide(){
+            this.activeTab = ( this.activeTab + 1 ) % this.navTabs.length
+            setTimeout(this.nextSlide, this.carouselLoopTime)
+        },
+        gotoSlide(slide){
+            this.activeTab = slide
+            this.resetTimer()
+        },
+        clearTimer(){
+            if(this.timeout){
+                clearTimeout(this.timeout)
+            }
+        },
+        resetTimer(){
+            this.clearTimer()
+            this.timeout = setTimeout(this.nextSlide, this.carouselLoopTime)
+        }
+    },
+
+    created(){
+        this.timeout = null
+    },
+
+    mounted(){
+        this.resetTimer()
+    },
+
+    beforeDestroy() {
+        this.clearTimer()
+    },
 }
 </script>
 
