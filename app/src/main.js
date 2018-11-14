@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faGraduationCap, faHandRock, faAsterisk } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faGithub, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import * as components from '@/components'
 
 import App from './App'
 import router from './router'
@@ -24,6 +25,13 @@ library.add(
   faAsterisk
 )
 Vue.component('fa', FontAwesomeIcon)
+const globalComponents = {}
+for(let key in components){
+  let component = components[key]
+  if(component.name){
+    globalComponents[name] = component
+  }
+}
 
 // TODO: Load this from a firebase_config.json
 const config = {
@@ -41,7 +49,7 @@ let unsub = firebase.auth().onAuthStateChanged( (user) => {
   new Vue({
     el: '#app',
     router,
-    components: { App },
+    components: { App, ...globalComponents },
     template: '<App/>'
   })
   unsub()
