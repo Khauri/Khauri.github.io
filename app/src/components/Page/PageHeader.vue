@@ -1,12 +1,6 @@
 <template>
     <div :class="['container', isExpanded && 'expanded', !showHeader && 'mini']">
-        <div class="spacer" v-if="!isExpanded" />
-        <transition name="fade">
-            <navbar 
-                :miniMode="!showHeader" 
-                :class="['navbar', isScrolled && 'scrolled']" 
-                v-show="isExpanded"/>
-        </transition>
+        <div class="spacer"/>
         <div class="header-bg">
             <img
                 class="header-bg-img"
@@ -54,8 +48,7 @@ export default {
 <style scoped>
     .container {
         position : relative;
-        max-width : 720px;
-        width : 720px;
+        width : 100%;
         min-height : 400px;
         height : 400px;
         display : flex;
@@ -91,15 +84,14 @@ export default {
         position : absolute;
         top : 0;
         left : 0;
-        right : 0;
-        bottom : 0;
+        
         z-index : -1;
         overflow : hidden;
         background : black;
     }
     .header-bg-img {
         width : 100%;
-        height : 400px;
+        /* height : 400px; */
         transition : ease-in-out all 1s;
     }
     .container.expanded .header-bg-img {
@@ -132,19 +124,5 @@ export default {
     .spacer {
         height : 50px;
         width : 720px;
-    }
-    .navbar {
-        position : sticky;
-        background : rgba(0,0,0,0.3);
-        background : linear-gradient(black, transparent);
-        top : 0;
-        width : 720px;
-        color : white;
-        transition : ease-in-out all 1s, ease-out background-color .2s;
-        z-index : 9999;
-    }
-    .navbar.scrolled {
-        background : rgba(255,255,255,0.95);
-        color : var(--text0);
     }
 </style>

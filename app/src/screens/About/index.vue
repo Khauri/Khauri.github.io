@@ -39,20 +39,4 @@ export default {
         background-repeat:   no-repeat;
         background-position : center center;
     }
-    .about-content{
-        align-self:  center;
-        max-width : 720px;
-        height : 600px;
-        background : blue;
-    }
-    .header-text {
-        z-index : 1;
-        text-align : left;
-        max-width : 240px;
-        margin : auto 80px;
-    }
-    .sm-icon {
-        cursor : pointer;
-        margin : 0 5px;
-    }
 </style>

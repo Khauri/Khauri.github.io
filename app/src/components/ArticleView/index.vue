@@ -3,10 +3,10 @@
     Used to display an article!
 -->
 <template>
-    <div 
+    <article 
         class="content site-article"
         v-html="article.html">
-    </div>
+    </article>
 </template>
 
 <script>
