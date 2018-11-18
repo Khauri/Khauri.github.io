@@ -88,7 +88,8 @@ export default {
         width : inherit;
         z-index : -1;
         overflow : hidden;
-        background : black;
+        display : flex;
+        align-items : center;
     }
     .header-bg-img {
         width : 100%;

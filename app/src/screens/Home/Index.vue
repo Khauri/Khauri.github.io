@@ -8,6 +8,7 @@
     <div class="container">
         <div :class="['content-wrapper', expanded && 'expanded']">
             <carousel 
+                :isVertical="isVerticalCarousel"
                 :loop="true"
                 :slideDirection="slideDirection"
                 :isExpanded="expanded" 
@@ -25,7 +26,12 @@
                     <contact :isExpanded="expanded"/>
                 </slide>
             </carousel>
-            <div class="navigation" v-if="!expanded">
+            
+            <!-- <div class="quickems" v-if="!expanded">
+                <h3>Download Resume</h3>
+            </div> -->
+        </div>
+        <div class="navigation" v-if="!expanded">
                 <div 
                     class="nav-tab" 
                     v-for="(tab, index) in navTabs" 
@@ -35,10 +41,6 @@
                     {{tab}}
                 </div>
             </div>
-            <div class="quickems" v-if="!expanded">
-                <h3>Download Resume</h3>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -51,6 +53,7 @@ import blog from '../Blog'
 
 import slide from './Slide'
 import carousel from './Carousel'
+
 export default {
     components : { 
         CanvasDrip,
@@ -73,7 +76,8 @@ export default {
             slideDirection : 'right',
             activeTab : 0,
             expanded : this.isExpanded,
-            carouselLoopTime : 5 * 1000
+            carouselLoopTime : 5 * 1000,
+            isVerticalCarousel : false
         }
     },
 
@@ -103,6 +107,7 @@ export default {
             }
         },
         resetTimer(){
+            return
             this.clearTimer()
             this.timeout = setTimeout(this.nextSlide, this.carouselLoopTime)
         }
@@ -114,6 +119,10 @@ export default {
 
     mounted(){
         this.resetTimer()
+        window.addEventListener('resize', ()=>{
+            this.isVerticalCarousel = document.body.clientWidth <= 780
+        })
+        this.isVerticalCarousel = document.body.clientWidth <= 780
     },
 
     beforeDestroy() {
@@ -152,13 +161,15 @@ export default {
     }
     .navigation {
         position : absolute;
-        top : 400px;
+        top : calc(50% + 300px / 2);
+
+        /* top : 400px; */
         height : 60px;
         background : var(--bg-color);
         width : 720px;
         align-self : center;
         border-radius : 0 0 4px 4px;
-        z-index : -1;
+        z-index : 99;
         display : flex;
         flex-direction: row;
         align-items: center;
@@ -200,6 +211,17 @@ export default {
         min-height : 300px;
         z-index : -4;
         width : 720px;
+    }
+
+    @media only screen and (max-width : 780px){
+        .navigation {
+            width : 100%;
+            top : initial;
+            bottom : 0;
+        }
+        .content-wrapper {
+            top : 0;
+        }
     }
 </style>
 

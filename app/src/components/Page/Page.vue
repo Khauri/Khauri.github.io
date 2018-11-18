@@ -19,7 +19,8 @@
                 :isScrolled="isScrolled">
                     <slot name="header"></slot>
             </page-header>
-            <page-body 
+            <page-body
+                v-if="isExpanded"
                 :isExpanded="isExpanded">
                 <div class="scroll-btn" @click="scrollToTop" v-if="isScrolled">top</div>
                 <slot name="body"></slot>
@@ -99,7 +100,7 @@ export default {
 }
 .page-content-wrapper {
     position : relative;
-    max-width : 720px;
+    width : 720px;
 }
 .scroll-btn {
     opacity : 0.5;

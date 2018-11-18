@@ -48,15 +48,6 @@ export default {
         background-repeat:   no-repeat;
         background-position : center center;
     }
-    .header { 
-        
-    }
-    .about-content{
-        align-self:  center;
-        max-width : 720px;
-        height : 600px;
-        background : blue;
-    }
     .clickable {
         margin : 10px;
         color : white;

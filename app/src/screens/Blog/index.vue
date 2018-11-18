@@ -48,15 +48,4 @@ export default {
 </script>
 
 <style scoped>
-    .container {
-        flex : 1;
-        display : flex;
-    }
-    .content-body {
-        width : 720px;  
-    }
-
-    .article-box {
-        text-align : left;
-    }
 </style>

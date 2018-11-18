@@ -1,12 +1,15 @@
 <template>
     <div :class="[
         'carousel-root',
-        isExpanded ? 'carousel-root-expand' : ''
+        isExpanded && 'carousel-root-expand',
+        isVertical && 'vertical'
         ]">
         <div class="pages">
             <slot></slot>
         </div>
-        <div :class="[
+        <div
+            v-if="!isVertical"
+            :class="[
             'inner-carousel',
             isExpanded ? `inner-carousel-expanded`:''
             ]">
@@ -34,6 +37,10 @@ export default {
     props : {
         isExpanded : {
             default : false, 
+            type : Boolean
+        },
+        isVertical : {
+            default : false,
             type : Boolean
         },
         slideDirection : {
@@ -112,11 +119,23 @@ export default {
         transition : ease-in-out all 0.5s;
 
     }
+
+    .carousel-root.vertical {
+        clip-path: inset(0 0 0 0 round 0px);
+    }
+
     .pages { 
         width : 100%;
         height : 100%;
         display : flex;
         justify-content: center;
+    }
+    .carousel-root.vertical .pages { 
+        width : 100%;
+        height : 100%;
+        display : flex;
+        flex-direction : column;
+        align-items: center;
     }
     
     .carousel-root-expand {
@@ -161,10 +180,8 @@ export default {
         background : white;
         opacity : 1;
     }
-    .carousel-tabs {
-        height : 200px;
-        display : flex;
-        flex-direction : row;
-        justify-content: space-around;
+    /** Vertical "unpacked" Slides layout*/
+    @media only screen and (max-width : 780px){
+
     }
 </style>
