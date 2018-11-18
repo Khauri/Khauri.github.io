@@ -1,13 +1,14 @@
 <template>
     <div id="app">
         <div class="root">
-            <tech-scribble 
-              class="tech-scribble"
-              traceColor="rgba(0,0,0,0.12)"
-              traceFillColor="transparent"
-              :restartAfter="loopTime"
-              :width="dim.width" 
-              :height="dim.height"/>
+            <tech-scribble
+                v-if="dim.shouldShow"
+                class="tech-scribble"
+                traceColor="rgba(0,0,0,0.12)"
+                traceFillColor="transparent"
+                :restartAfter="loopTime"
+                :width="dim.width" 
+                :height="dim.height"/>
             <div class="router-content">
                 <router-view/>
             </div>
@@ -18,18 +19,25 @@
 <script>
 export default {
     name: 'App',
-    computed : {
-        dim(){
-            return {
+    data(){
+        return {
+            loopTime : 8 * 1000,
+            dim : {}
+        }
+    },
+    methods:{
+        calculateDimension(){
+            this.dim = {
+                // Don't bother rendering on smaller windows
+                shouldShow : document.body.clientWidth > 780,
                 width : document.body.clientWidth + 30,
                 height : document.body.clientHeight + 30
             }
         }
     },
-    data(){
-        return {
-            loopTime : 8 * 1000
-        }
+    mounted(){
+        window.addEventListener('resize', this.calculateDimension)
+        this.calculateDimension()
     }
 }
 </script>

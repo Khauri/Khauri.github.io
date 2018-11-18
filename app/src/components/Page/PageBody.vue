@@ -16,6 +16,7 @@ export default {
 <style>
 .page-body {
     width : 100%;
+    /* min-height : 400px; */
     background : white;
     color : rgba(0,0,0,.8);
     margin-bottom : 20px;

@@ -84,7 +84,8 @@ export default {
         position : absolute;
         top : 0;
         left : 0;
-        
+        height : inherit;
+        width : inherit;
         z-index : -1;
         overflow : hidden;
         background : black;
