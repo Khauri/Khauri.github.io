@@ -107,7 +107,6 @@ export default {
             }
         },
         resetTimer(){
-            return
             this.clearTimer()
             this.timeout = setTimeout(this.nextSlide, this.carouselLoopTime)
         }
